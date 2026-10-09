@@ -3,7 +3,7 @@
    stream: the HLS .m3u8 playlist URL, or a direct mp3/aac stream URL
    type: "hls" for .m3u8, "audio" for a direct mp3/aac link
    accent: any CSS color used to tint the tile */
-const STATIONS = [
+window.STATIONS = [
   {
     id: "fm961",
     name: "FM 96.1",
