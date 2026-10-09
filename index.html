@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Radio" />
+  <title>Radio</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="assets/logos/fm961.jpg" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="page">
+    <h1 class="page-title">Radio</h1>
+
+    <section class="now-playing" id="nowPlaying" data-state="idle">
+      <div class="np-art">
+        <img id="npLogo" alt="" src="" hidden />
+        <div class="np-placeholder" id="npPlaceholder">♪</div>
+        <span class="live-dot" id="liveDot" aria-hidden="true"></span>
+      </div>
+      <div class="np-info">
+        <div class="np-name" id="npName">Pick a station</div>
+        <div class="np-sub" id="npSub">Tap a big button below to listen</div>
+        <div class="np-status" id="npStatus" role="status" aria-live="polite"></div>
+      </div>
+      <button class="np-play" id="npPlay" type="button" aria-label="Play" disabled>
+        <svg viewBox="0 0 24 24" class="icon-play" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        <svg viewBox="0 0 24 24" class="icon-pause" aria-hidden="true"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+      </button>
+    </section>
+
+    <div class="grid" id="stations"></div>
+
+    <p class="hint" id="hint">Tip: use the volume buttons on the side of your tablet.</p>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@1/dist/hls.min.js"></script>
+  <script src="stations.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
