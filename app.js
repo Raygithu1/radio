@@ -81,11 +81,29 @@
       localStorage.setItem("radio.lastStation", station.id);
     } catch (e) {}
 
+    resolveStream(station)
+      .then(function (url) {
+        if (current && current.id === station.id) startPlayback(station, url);
+      })
+      .catch(function () {
+        if (current && current.id === station.id)
+          setState("error", "Can't reach this station. Tap to retry.");
+      });
+  }
+
+  function resolveStream(station) {
+    if (typeof station.resolve === "function") {
+      return Promise.resolve(station.resolve());
+    }
+    return Promise.resolve(station.stream);
+  }
+
+  function startPlayback(station, streamUrl) {
     var useNativeHls = station.type === "hls" && !(window.Hls && window.Hls.isSupported());
 
     if (station.type === "hls" && window.Hls && window.Hls.isSupported()) {
       hls = new Hls({ enableWorker: true, lowLatencyMode: true });
-      hls.loadSource(station.stream);
+      hls.loadSource(streamUrl);
       hls.attachMedia(audio);
       hls.on(Hls.Events.ERROR, function (evt, data) {
         if (data && data.fatal) {
@@ -99,7 +117,7 @@
         }
       });
     } else {
-      audio.src = station.stream;
+      audio.src = streamUrl;
       if (useNativeHls) audio.load();
     }
 
@@ -113,9 +131,21 @@
     if (audio.paused) {
       wantPlay = true;
       setState("loading", "Loading\u2026");
-      audio.play().catch(function () {
-        setState("error", "Can't reach this station. Tap to retry.");
-      });
+      if (typeof current.resolve === "function") {
+        resolveStream(current)
+          .then(function (url) {
+            destroyHls();
+            stopAudio();
+            startPlayback(current, url);
+          })
+          .catch(function () {
+            setState("error", "Can't reach this station. Tap to retry.");
+          });
+      } else {
+        audio.play().catch(function () {
+          setState("error", "Can't reach this station. Tap to retry.");
+        });
+      }
     } else {
       wantPlay = false;
       audio.pause();
