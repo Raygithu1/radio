@@ -45,5 +45,14 @@ window.STATIONS = [
           return t;
         });
     }
+  },
+  {
+    id: "am1320",
+    name: "AM 1320",
+    subtitle: "加拿大溫哥華 華僑之聲",
+    logo: "assets/logos/am1320.png",
+    stream: "https://stream.radiojar.com/nugqupcv8qzuv.mp3",
+    type: "audio",
+    accent: "#e11d48"
   }
 ];
