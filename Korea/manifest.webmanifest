@@ -1,0 +1,18 @@
+{
+  "name": "Korea Radio",
+  "short_name": "Korea Radio",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "assets/logos/mbcfm4u.png",
+      "sizes": "640x400",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
