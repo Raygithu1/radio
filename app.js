@@ -2,7 +2,7 @@
   "use strict";
 
   var el = {
-    grid: document.getElementById("stations"),
+    stations: document.getElementById("stations"),
     nowPlaying: document.getElementById("nowPlaying"),
     npLogo: document.getElementById("npLogo"),
     npPlaceholder: document.getElementById("npPlaceholder"),
@@ -63,7 +63,7 @@
   }
 
   function markActive(id) {
-    var tiles = el.grid.querySelectorAll(".station");
+    var tiles = el.stations.querySelectorAll(".station");
     for (var i = 0; i < tiles.length; i++) {
       tiles[i].classList.toggle("is-active", tiles[i].dataset.id === id);
     }
@@ -225,9 +225,36 @@
 
   function render() {
     var list = window.STATIONS || [];
-    el.grid.innerHTML = "";
+    el.stations.innerHTML = "";
+
+    // Group stations into sections (e.g. Vancouver, Toronto) while keeping
+    // the order they appear in stations.js.
+    var groups = [];
     list.forEach(function (station) {
-      el.grid.appendChild(makeTile(station));
+      var sectionName = (station && station.section) || "Stations";
+      var group = null;
+      for (var g = 0; g < groups.length; g++) {
+        if (groups[g].name === sectionName) { group = groups[g]; break; }
+      }
+      if (!group) {
+        group = { name: sectionName, stations: [] };
+        groups.push(group);
+      }
+      group.stations.push(station);
+    });
+
+    groups.forEach(function (group) {
+      var heading = document.createElement("h2");
+      heading.className = "section-title";
+      heading.textContent = group.name;
+      el.stations.appendChild(heading);
+
+      var grid = document.createElement("div");
+      grid.className = "grid";
+      group.stations.forEach(function (station) {
+        grid.appendChild(makeTile(station));
+      });
+      el.stations.appendChild(grid);
     });
 
     var last = null;
