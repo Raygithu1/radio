@@ -5,11 +5,11 @@
    accent: any CSS color used to tint the tile */
 window.STATIONS = [
   {
-    id: "fm961",
-    name: "FM 96.1",
+    id: "am1470",
+    name: "AM 1470",
     subtitle: "加拿大中文電台",
-    logo: "assets/logos/fm961.jpg",
-    stream: "https://stream.eseenet.com/radio/fm961.stream/playlist.m3u8",
+    logo: "assets/logos/am1470.jpg",
+    stream: "https://stream.eseenet.com/radio/am1470.stream/playlist.m3u8",
     type: "hls",
     accent: "#e11d48"
   },
@@ -20,6 +20,15 @@ window.STATIONS = [
     logo: "assets/logos/am1320.png",
     stream: "https://stream.radiojar.com/nugqupcv8qzuv.mp3",
     type: "audio",
+    accent: "#e11d48"
+  },
+  {
+    id: "fm961",
+    name: "FM 96.1",
+    subtitle: "加拿大中文電台",
+    logo: "assets/logos/fm961.jpg",
+    stream: "https://stream.eseenet.com/radio/fm961.stream/playlist.m3u8",
+    type: "hls",
     accent: "#e11d48"
   }
 ];
