@@ -5,16 +5,6 @@
    accent: any CSS color used to tint the tile */
 window.STATIONS = [
   {
-    id: "am1470",
-    name: "AM 1470",
-    subtitle: "加拿大中文電台",
-    logo: "assets/logos/am1470.jpg",
-    stream: "https://stream.eseenet.com/radio/am1470.stream/playlist.m3u8",
-    type: "hls",
-    accent: "#e11d48",
-    section: "Vancouver"
-  },
-  {
     id: "am1320",
     name: "AM 1320",
     subtitle: "加拿大溫哥華 華僑之聲",
